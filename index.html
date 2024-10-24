@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pagina de inicio</title>
+</head>
+<body>
+
+    <div class="contenedor" id="posts"></div>
+
+    <script>
+        const apiURL = 'https://amelica.org/wp-json/wp/v2/posts';
+        function formatearFecha(fecha) {
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const dia = fecha.getDate();
+            const mes = meses[fecha.getMonth()];
+            const año = fecha.getFullYear();
+            return `${dia} de ${mes} de ${año}`;
+        }
+
+        async function obtenerPosts() {
+            try {
+                const respuesta = await fetch(apiURL);
+                if (!respuesta.ok) {
+                    throw new Error(`Error: ${respuesta.status}`);
+                }
+                const posts = await respuesta.json();
+                mostrarPosts(posts);
+            } catch (error) {
+                console.error('Error al consumir la API:', error);
+            }
+        }
+
+        function mostrarPosts(posts) {
+            const postsDiv = document.getElementById('posts');
+            posts.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('tarjeta');
+                const fechaModificada = new Date(post.modified);
+                const fechaFormateada = formatearFecha(fechaModificada);
+                postDiv.innerHTML = `
+                    <div class="contenido"><h3>Post ID: ${post.title.rendered}</h3>
+                    <p>${post.excerpt.rendered}</p>
+                    <a href="${post.link}" target="_blank">Continuar leyendo &#8594</a></div>
+                    <div class="fecha">${fechaFormateada}</div>
+                `;
+                postsDiv.appendChild(postDiv);
+            });
+        }
+        obtenerPosts();
+    </script>
+
+</body>
+</html>

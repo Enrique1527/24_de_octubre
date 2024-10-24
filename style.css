@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0; 
+    padding-left: 240px;
+    padding-right: 240px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    padding: 20px;
+    margin: 0 auto; 
+  
+}
+
+.tarjeta {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta:hover {
+    transform: scale(1.05);
+}
+
+.tarjeta h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.tarjeta p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.tarjeta a {
+    text-decoration: none;
+    color: #ff0000;
+    font-weight: bold;
+    padding-bottom: 80px;
+}
+.contenido{
+    height: 85%;
+    flex-grow: 1;
+    flex-wrap: 1;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+.fecha{
+    height: 5%;
+    display: flex;
+    flex-direction: column-reverse;
+    background: #7574744d;
+    margin-top: auto;
+    padding-bottom: 6px;
+    color: gray;
+}
+
+.tarjeta a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .contenedor {
+        grid-template-columns: 1fr; 
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0; 
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
